@@ -1,0 +1,32 @@
+import time
+
+# Function to start the countdown timer
+def countdown_timer(seconds):
+    print("Countdown Timer Started!")
+    print(f"Time remaining: {seconds} seconds")
+    
+    # Start counting down
+    while seconds:
+        mins, secs = divmod(seconds, 60)  # Convert seconds to minutes and seconds
+        time_format = '{:02d}:{:02d}'.format(mins, secs)  # Format the time as MM:SS
+        print(time_format, end='\r')  # Print the time, overwrite the previous output
+        time.sleep(1)  # Wait for 1 second
+        seconds -= 1  # Decrease the time by 1 second
+    
+    print("00:00\nTime's up! The event has arrived!")
+
+# Get input from the user for the countdown time
+def get_user_input():
+    try:
+        total_seconds = int(input("Enter the time in seconds for the countdown: "))
+        if total_seconds <= 0:
+            print("Please enter a positive number for the countdown time.")
+            get_user_input()
+        else:
+            countdown_timer(total_seconds)
+    except ValueError:
+        print("Invalid input! Please enter a valid number.")
+        get_user_input()
+
+# Start the countdown by getting input from the user
+get_user_input()
